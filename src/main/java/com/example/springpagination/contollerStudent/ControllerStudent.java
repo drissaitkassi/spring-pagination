@@ -30,7 +30,7 @@ public class ControllerStudent {
 
         return "index";
     }
-    @GetMapping(path = "/add")
+ /*   @GetMapping(path = "/add")
     public String add(){
         Student s1=new Student(null,"driss","ait kassi","driss@gmail.com",31,new Date());
         Student s2=new Student(null,"driss","ait kassi","driss@gmail.com",31,new Date());
@@ -50,5 +50,5 @@ public class ControllerStudent {
         List<Student> studentL= Arrays.asList(s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14);
         repositoryStudent.saveAll(studentL);
         return "add";
-    }
+    }*/
 }

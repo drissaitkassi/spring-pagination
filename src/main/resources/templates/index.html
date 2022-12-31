@@ -41,8 +41,11 @@
             </table>
             <ul class="nav nav-pills">
                 <li class="ms-2" th:each="page,status:${studentPage}">
-                    <a class="btn btn-outline-primary " th:text="${status.index}"
+                    <a th:if="${!(status.index==page)}" class="btn btn-outline-primary " th:text="${status.index}"
                     th:href="@{index(page=${status.index})}">
+                    </a>
+                    <a th:if="${(status.index==page)}" class="btn btn-primary " th:text="${status.index}"
+                       th:href="@{index(page=${status.index})}">
                     </a>
                 </li>
             </ul>
