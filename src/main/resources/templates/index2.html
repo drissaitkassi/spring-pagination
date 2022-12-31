@@ -18,6 +18,12 @@
               <h3 class="card-title text-center">
                 Patient Table
               </h3>
+              <form class="form-group d-flex flex-row" method="get" th:action="@{index2(keyword=${serchedKeyword})}">
+                <label for="chearcherPatient" class="text-left font-weight-bol">Recherche Patients</label>
+                <input type="text" class="form-control" placeholder="taper votre requet" id="chearcherPatient"  name="keyword" th:value="${serchedKeyword}">
+                <button type="submit" class="btn btn-dark"> Recherche </button>
+
+              </form>
               <table class="table table-striped">
                 <thead>
                 <tr>
@@ -26,6 +32,8 @@
                   <th scope="col">Date</th>
                   <th scope="col">Score</th>
                   <th scope="col">Malade</th>
+                  <th scope="col">Delete</th>
+
                 </tr>
                 </thead>
                 <tbody>
@@ -35,17 +43,20 @@
                   <td th:text="${l.getDateNaissance()}"></td>
                   <td th:text="${l.getScore()}"></td>
                   <td th:text="${l.isMalade()}"></td>
+                  <td>
+                    <a onclick="confirm('voulez vous supprimer')" class="btn btn-danger" th:href="@{delete(id=${l.getId()},page=${currentpage},keyword=${serchedKeyword})}">Delete</a>
+                  </td>
 
                 </tr>
                 </tbody>
               </table>
               <ul class="nav nav-pills">
                 <li class="ms-2" th:each="page,status:${pagePatient}">
-                  <a th:if="${!(status.index==page)}" class="btn btn-outline-primary " th:text="${status.index}"
-                     th:href="@{index2(page=${status.index})}">
+                  <a th:if="${!(status.index==currentpage)}" class="btn btn-outline-primary " th:text="${status.index}"
+                     th:href="@{index2(page=${status.index},keyword=${serchedKeyword})}">
                   </a>
-                  <a th:if="${(status.index==page)}" class="btn btn-primary " th:text="${status.index}"
-                     th:href="@{index2(page=${status.index})}">
+                  <a th:if="${(status.index==currentpage)}" class="btn btn-primary " th:text="${status.index}"
+                     th:href="@{index2(page=${status.index},keyword=${serchedKeyword})}">
                   </a>
                 </li>
               </ul>
