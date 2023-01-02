@@ -48,9 +48,8 @@ public class ControllerPatient {
     }
 
     @GetMapping(path = "/formpatient")
-    public String add(){
-
-
+    public String formPatient(Model model){
+        model.addAttribute("patient",new Patient());
         return "formpatient";
     }
 

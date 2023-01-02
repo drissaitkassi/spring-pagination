@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.internal.util.xml.DTDEntityResolver;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -17,6 +18,7 @@ public class Patient {
     private Long id;
     private String nom;
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy/mm/dd")
     private Date dateNaissance;
     private boolean malade;
     private int score;
