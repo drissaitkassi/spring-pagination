@@ -41,6 +41,9 @@
                         <th scope="col">Score</th>
                         <th scope="col">Malade</th>
                         <th scope="col">Delete</th>
+                        <th scope="col">Update</th>
+
+
 
                     </tr>
                     </thead>
@@ -54,6 +57,11 @@
                         <td>
                             <a onclick="confirm('voulez vous supprimer')" class="btn btn-danger"
                                th:href="@{delete(id=${l.getId()},page=${currentpage},keyword=${serchedKeyword})}">Delete</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-success" th:href="@{formpatientupdate}">
+                                Update
+                            </a>
                         </td>
 
                     </tr>

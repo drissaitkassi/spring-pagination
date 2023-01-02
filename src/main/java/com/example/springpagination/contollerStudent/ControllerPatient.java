@@ -54,4 +54,11 @@ public class ControllerPatient {
         return "formpatient";
     }
 
+    @GetMapping(path = "/formpatientupdate")
+    public String update(){
+
+
+        return "formpatientupdate";
+    }
+
 }
