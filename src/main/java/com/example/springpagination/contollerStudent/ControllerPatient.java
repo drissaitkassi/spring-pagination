@@ -47,23 +47,11 @@ public class ControllerPatient {
         return "redirect:/index2?page="+page+"&keyword="+keyword;
     }
 
-    @GetMapping(path = "/add")
+    @GetMapping(path = "/formpatient")
     public String add(){
-        Patient p1=new Patient(null,"john doe",new Date(),true,34);
-        Patient p2=new Patient(null,"jane doe",new Date(),false,55);
-        Patient p3=new Patient(null,"jill doe",new Date(),true,46);
-        Patient p4=new Patient(null,"jordan doe",new Date(),true,74);
-        Patient p5=new Patient(null,"mike doe",new Date(),false,26);
 
 
-        List<Patient> patientL= Arrays.asList(p1,p2,p3,p4,p5);
-        repositoryPatient.saveAll(patientL);
-
-        return "add";
+        return "formpatient";
     }
-    @GetMapping("/listpatient")
-    @ResponseBody
-    public List<Patient> lsPatient(){
-       return repositoryPatient.findAll();
-    }
+
 }
