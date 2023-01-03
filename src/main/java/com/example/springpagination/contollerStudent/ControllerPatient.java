@@ -4,12 +4,16 @@ package com.example.springpagination.contollerStudent;
 import com.example.springpagination.entity.Patient;
 import com.example.springpagination.entity.Student;
 import com.example.springpagination.repositoryStudent.RepositoryPatient;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.boot.Banner;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -53,10 +57,20 @@ public class ControllerPatient {
         return "formpatient";
     }
 
+    @PostMapping(path = "/save")
+    public String save(@Valid Patient patient, BindingResult bindingResult){
+
+        if (bindingResult.hasErrors())return "formpatient";
+        repositoryPatient.save(patient);
+        return "redirect:/index2";
+    }
+
+
     @GetMapping(path = "/formpatientupdate")
-    public String update(){
-
-
+    public String updatepat(Model model,Long id){
+        Patient patient= repositoryPatient.findById(id).orElse(null);
+        if (patient == null) throw new RuntimeException("patient null");
+        model.addAttribute("patient",patient);
         return "formpatientupdate";
     }
 

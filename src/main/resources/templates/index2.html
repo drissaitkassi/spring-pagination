@@ -59,7 +59,7 @@
                                th:href="@{delete(id=${l.getId()},page=${currentpage},keyword=${serchedKeyword})}">Delete</a>
                         </td>
                         <td>
-                            <a class="btn btn-success" th:href="@{formpatientupdate}">
+                            <a class="btn btn-success" th:href="@{formpatientupdate(id=${l.getId()},page=${currentpage},keyword=${serchedKeyword})}">
                                 Update
                             </a>
                         </td>
