@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+
+>
 
 
 <head>
@@ -17,7 +20,7 @@
 <body>
 
 <nav class=" mb-5 ps-5 pe-5 navbar navbar-expand-lg navbar-dark bg-dark ">
-    <a class="navbar-brand" href="#">PatientApp</a>
+    <a class="navbar-brand" th:href="@{index2}">PatientApp</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -40,6 +43,13 @@
                 <a class="nav-link"  th:href="@{logout}"> Logout
                     <i class="fa fa-sign-in" aria-hidden="true"></i>
                 </a>
+            </li>
+            <li class="nav-item">
+                <p class="nav-link"> Loged in as</p>
+            </li>
+
+            <li class="nav-item">
+              <p class="nav-link" sec:authentication="name"> </p>
             </li>
         </ul>
 

@@ -26,7 +26,7 @@ public class ControllerPatient {
 
     private RepositoryPatient repositoryPatient;
 
-    @GetMapping(path = "/index2")
+    @GetMapping(path = "user/index2")
     public String patientView(Model model,
                               @RequestParam(name = "page",defaultValue = "0") int page,
                               @RequestParam(name = "size",defaultValue = "5") int size,
@@ -43,30 +43,35 @@ public class ControllerPatient {
 
         return "index2";
     }
-    @GetMapping(path = "/delete")
+    @GetMapping(path = "admin/delete")
 
-    public String delete(Long id,int page,String keyword){
+    public String delete(@RequestParam(name = "id",defaultValue = "1") Long id,@RequestParam(name = "page",defaultValue = "0") int page, @RequestParam(name = "keyword",defaultValue = "") String keyword){
 
         repositoryPatient.deleteById(id);
-        return "redirect:/index2?page="+page+"&keyword="+keyword;
+        return "admin/index2?page="+page+"&keyword="+keyword;
     }
 
-    @GetMapping(path = "/formpatient")
+    @GetMapping(path = "/")
+    public String home(){
+        return "index2";
+    }
+
+    @GetMapping(path = "admin/formpatient")
     public String formPatient(Model model){
         model.addAttribute("patient",new Patient());
         return "formpatient";
     }
 
-    @PostMapping(path = "/save")
+    @PostMapping(path = "admin/save")
     public String save(@Valid Patient patient, BindingResult bindingResult){
 
         if (bindingResult.hasErrors())return "formpatient";
         repositoryPatient.save(patient);
-        return "redirect:/index2";
+        return "redirect:admin/index2";
     }
 
 
-    @GetMapping(path = "/formpatientupdate")
+    @GetMapping(path = "admin/formpatientupdate")
     public String updatepat(Model model,Long id){
         Patient patient= repositoryPatient.findById(id).orElse(null);
         if (patient == null) throw new RuntimeException("patient null");
