@@ -26,10 +26,10 @@ public class ControllerPatient {
 
     private RepositoryPatient repositoryPatient;
 
-    @GetMapping(path = "/user/index2")
+    @GetMapping(path = "/index2")
     public String patientView(Model model,
                               @RequestParam(name = "page",defaultValue = "0") int page,
-                              @RequestParam(name = "size",defaultValue = "5") int size,
+                              @RequestParam(name = "size",defaultValue = "10") int size,
                               @RequestParam(name = "keyword",defaultValue = "") String keyword){
        Page<Patient> listPatient= repositoryPatient.findByNomContains(keyword,PageRequest.of(page,size));
 
@@ -43,12 +43,12 @@ public class ControllerPatient {
 
         return "index2";
     }
-    @GetMapping(path = "/admin/delete")
+    @GetMapping(path = "/delete")
 
-    public String delete(@RequestParam(name = "id",defaultValue = "1") Long id,@RequestParam(name = "page",defaultValue = "0") int page, @RequestParam(name = "keyword",defaultValue = "") String keyword){
+    public String delete(Long id, int page, @RequestParam(name = "keyword",defaultValue = "") String keyword){
 
         repositoryPatient.deleteById(id);
-        return "user/index2?page="+page+"&keyword="+keyword;
+        return "redirect:/index2?page="+page+"&keyword="+keyword;
     }
 
     @GetMapping(path = "/")
@@ -56,22 +56,22 @@ public class ControllerPatient {
         return "index2";
     }
 
-    @GetMapping(path = "/admin/formpatient")
+    @GetMapping(path = "/formpatient")
     public String formPatient(Model model){
         model.addAttribute("patient",new Patient());
         return "formpatient";
     }
 
-    @PostMapping(path = "/admin/save")
+    @PostMapping(path = "/save")
     public String save(@Valid Patient patient, BindingResult bindingResult){
 
         if (bindingResult.hasErrors())return "formpatient";
         repositoryPatient.save(patient);
-        return "redirect:user/index2";
+        return "redirect:index2";
     }
 
 
-    @GetMapping(path = "/admin/formpatientupdate")
+    @GetMapping(path = "/formpatientupdate")
     public String updatepat(Model model,Long id){
         Patient patient= repositoryPatient.findById(id).orElse(null);
         if (patient == null) throw new RuntimeException("patient null");

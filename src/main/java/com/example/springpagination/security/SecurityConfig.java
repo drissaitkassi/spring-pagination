@@ -1,9 +1,6 @@
 package com.example.springpagination.security;
-
-import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.aspectj.EnableSpringConfigured;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -17,20 +14,16 @@ import java.net.http.HttpRequest;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests();
-        http.authorizeHttpRequests().requestMatchers("admin/**").hasRole("ADMIN");
-        http.authorizeHttpRequests().requestMatchers("user/**").hasRole("USER");
+        http.authorizeHttpRequests().requestMatchers("/delete/**","/formpatientupdate/**","/save/**","/formpatient/**").hasRole("ADMIN");
+        http.authorizeHttpRequests().requestMatchers("/index2").hasRole("USER");
         http.authorizeHttpRequests().anyRequest().authenticated();
         http.exceptionHandling().accessDeniedPage("/403");
         http.formLogin();
         return http.build();
-
     }
-
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
         UserDetails admin = User.builder()
