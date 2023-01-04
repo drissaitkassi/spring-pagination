@@ -1,11 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" layout:decorate="~{template1}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Access Denied</title>
 </head>
 <body>
-<h1> access denied </h1>
-
+<section layout:fragment="content1">
+    <div class="d-flex align-items-center justify-content-center vh-100">
+        <div class="text-center">
+            <h1 class="display-1 fw-bold">403</h1>
+            <p class="fs-3"> <span class="text-danger">Opps!</span> Access to Page Denied.</p>
+            <p class="lead">
+                The page you’re looking for can't be Accessed.
+            </p>
+            <a href="index.html" class="btn btn-primary">Go Home</a>
+        </div>
+    </div></section>
 </body>
 </html>
